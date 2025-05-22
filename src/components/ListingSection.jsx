@@ -6,34 +6,38 @@ const mockListings = [
   {
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjacMUivyo-I1deA_zLuRn8py-uRGAjZ_rrQ&s",
     title: "Room in Lahore",
-    price: "$39 for 2 nights",
+    price: "$39",
+    nights: 2,
     rating: 4.96,
   },
   {
     image: "https://picsum.photos/200/300?1",
     title: "Condo in Lahore",
-    price: "$63 for 2 nights",
+    price: "$63",
+    nights: 2,
     rating: 4.92,
   },
   {
     image: "https://picsum.photos/200/300?2",
     title: "Home in Lahore",
-    price: "$216 for 2 nights",
+    price: "$216",
+    nights: 2,
     rating: 5.0,
   },
   {
     image: "https://picsum.photos/200/300?3",
     title: "Apartment in Lahore",
-    price: "$66 for 2 nights",
+    price: "$66",
+    nights: 2,
     rating: 5.0,
   },
   {
     image: "https://picsum.photos/200/300?4",
     title: "Villa in Lahore",
-    price: "$110 for 2 nights",
+    price: "$110",
+    nights: 2,
     rating: 4.95,
   },
-  // Add more listings as needed
 ];
 
 const ListingSection = ({ title = "Popular homes in Lahore" }) => {
@@ -49,10 +53,10 @@ const ListingSection = ({ title = "Popular homes in Lahore" }) => {
   };
 
   return (
-    <div className="px-6 my-6">
-      {/* Header */}
+    <section className="px-4 md:px-6 my-6">
+      {/* Section Header */}
       <div className="flex justify-between items-center mb-3">
-        <h3 className="text-xl font-semibold">{title}</h3>
+        <h3 className="text-lg md:text-xl font-semibold">{title}</h3>
         <div className="space-x-2 hidden md:flex">
           <button
             onClick={() => scroll('left')}
@@ -69,16 +73,16 @@ const ListingSection = ({ title = "Popular homes in Lahore" }) => {
         </div>
       </div>
 
-      {/* Listing cards row */}
+      {/* Scrollable Listing Row */}
       <div
         ref={scrollRef}
-        className="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth"
+        className="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar pb-2"
       >
         {mockListings.map((listing, index) => (
           <ListingCard key={index} {...listing} />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

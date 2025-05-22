@@ -1,7 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import StyledCalendar from './StyledCalendar';
-// import { addDays } from 'date-fns';
 
 const destinations = [
   { label: 'Nearby', description: 'Find what’s around you' },
@@ -16,6 +15,7 @@ const SearchBar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showGuests, setShowGuests] = useState(false);
+
   const [selectionRange, setSelectionRange] = useState({
     startDate: null,
     endDate: null,
@@ -32,7 +32,7 @@ const SearchBar = () => {
   const calendarRef = useRef();
   const guestRef = useRef();
 
-  // Scroll hides all dropdowns
+  // Close on scroll
   useEffect(() => {
     const handleScroll = () => {
       setShowDropdown(false);
@@ -45,7 +45,7 @@ const SearchBar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close calendar on outside click
+  // Outside click for calendar
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (calendarRef.current && !calendarRef.current.contains(e.target)) {
@@ -56,7 +56,7 @@ const SearchBar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Close guests on outside click
+  // Outside click for guests
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (guestRef.current && !guestRef.current.contains(e.target)) {
@@ -78,10 +78,10 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="flex justify-center py-4 relative z-50">
-      <div className="flex items-center bg-white rounded-full shadow-lg px-4 py-2 space-x-4 w-full max-w-4xl">
+    <div className="flex justify-center px-4 py-4 relative z-50">
+      <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-2 bg-white rounded-2xl shadow-lg px-4 py-4 w-full max-w-4xl">
         {/* Where */}
-        <div className="relative w-[40%]">
+        <div className="relative w-full md:w-[40%]">
           <input
             className="w-full px-4 py-2 text-sm rounded-full bg-gray-100 focus:outline-none focus:ring-0 transition"
             placeholder="Where"
@@ -89,7 +89,7 @@ const SearchBar = () => {
             onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
           />
           {showDropdown && (
-            <div className="absolute z-10 left-0 right-0 mt-4 bg-white shadow-lg rounded-2xl p-4 overflow-y-auto border border-gray-200">
+            <div className="absolute z-10 left-0 right-0 mt-2 bg-white shadow-lg rounded-2xl p-4 overflow-y-auto border border-gray-200">
               <p className="text-sm text-gray-500 font-medium mb-2">
                 Suggested destinations
               </p>
@@ -108,7 +108,7 @@ const SearchBar = () => {
         </div>
 
         {/* Check In */}
-        <div className="w-[20%] relative">
+        <div className="w-full md:w-[20%] relative">
           <input
             className="w-full px-4 py-2 text-sm rounded-full bg-gray-100 focus:outline-none focus:ring-0 cursor-pointer"
             placeholder="Check in"
@@ -123,7 +123,7 @@ const SearchBar = () => {
         </div>
 
         {/* Check Out */}
-        <div className="w-[20%] relative">
+        <div className="w-full md:w-[20%] relative">
           <input
             className="w-full px-4 py-2 text-sm rounded-full bg-gray-100 focus:outline-none focus:ring-0 cursor-pointer"
             placeholder="Check out"
@@ -138,7 +138,7 @@ const SearchBar = () => {
         </div>
 
         {/* Guests */}
-        <div className="w-[20%] relative">
+        <div className="w-full md:w-[20%] relative">
           <input
             className="w-full rounded-full px-4 py-2 bg-gray-100 focus:outline-none focus:ring-0 cursor-pointer"
             placeholder="Who"
@@ -150,7 +150,7 @@ const SearchBar = () => {
           {showGuests && (
             <div
               ref={guestRef}
-              className="absolute mt-4 right-0 w-[320px] bg-white rounded-2xl shadow-xl p-4 z-50 space-y-4"
+              className="absolute mt-2 right-0 w-[320px] bg-white rounded-2xl shadow-xl p-4 z-50 space-y-4"
             >
               {[
                 { label: 'Adults', desc: 'Ages 13 or above', key: 'adults' },
@@ -211,9 +211,11 @@ const SearchBar = () => {
         </div>
 
         {/* Search Button */}
-        <button className="text-white bg-blue-500 rounded-full p-2 hover:bg-blue-600 transition">
-          🔍
-        </button>
+        <div className="w-full md:w-auto flex justify-center md:justify-end">
+          <button className="w-full md:w-auto text-white bg-blue-500 rounded-full p-2 hover:bg-blue-600 transition">
+            🔍
+          </button>
+        </div>
       </div>
 
       {/* Calendar Dropdown */}
